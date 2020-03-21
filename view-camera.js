@@ -61,6 +61,7 @@ document.addEventListener('readystatechange', (event) => {
 			} else {
 				camId = 0;
 			}
+			camId=1;
 			if(cameras.length > 1) {
 				if(navigator.mediaDevices || navigator.mediaDevices.enumerateDevices) {
 					currentStream.getTracks().forEach(track => {
@@ -71,7 +72,7 @@ document.addEventListener('readystatechange', (event) => {
 						audio: false,
 						video: {
 								deviceId: {
-									exact: cameras[0]
+									exact: cameras[camId]
 								}
 							}
 					}).then(successCallback).catch(errorCallback);
