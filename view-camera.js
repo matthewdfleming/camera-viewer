@@ -27,19 +27,28 @@ document.addEventListener('readystatechange', (event) => {
 
 		if('mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices) {
 			if(navigator.mediaDevices.enumerateDevices) {
-				navigator.mediaDevices.enumerateDevices().then(media_devices => {
-					media_devices.forEach(media_device => {
+				navigator.mediaDevices.enumerateDevices().then(deviceInfos => {
+					for (let i = 0; i !== deviceInfos.length; ++i) {
+						const deviceInfo = deviceInfos[i];
 						if(location.href.includes('&debug')) {
-							console.log(media_device);
+							console.log(deviceInfo);
 						}
-				    if(media_device.kind === 'videoinput') {
-					   	cameras = cameras.concat(media_device.deviceId);
+						if (deviceInfo.kind === 'videoinput'){
+							cameras.push(deviceInfo.deviceId);
 						}
-					})
+					}
+// 					media_devices.forEach(media_device => {
+// 						if(location.href.includes('&debug')) {
+// 							console.log(media_device);
+// 						}
+// 				    if(media_device.kind === 'videoinput') {
+// 					   	cameras = cameras.concat(media_device.deviceId);
+// 						}
+// 					})
 		    })
 		  }
 		}
-
+		
 		video.addEventListener('click',event => {
 			if(location.href.includes('&debug')) {
 				console.log('clicked on video');
