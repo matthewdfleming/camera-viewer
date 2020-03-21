@@ -24,7 +24,7 @@ document.addEventListener('readystatechange', (event) => {
 
 		navigator.mediaDevices.getUserMedia({ audio: false, video: true })
 		  .then(successCallback)
-		  .then(media_device => {
+		  .then((media_device) => {
 					media_devices.forEach(media_device => {
 						if(location.href.includes('&debug')) {
 							console.log(media_device);
@@ -32,7 +32,8 @@ document.addEventListener('readystatechange', (event) => {
 				    if(media_device.kind === 'videoinput') {
 					   	cameras = cameras.concat(media_device.deviceId);
 						}
-					})
+					}
+		   })
 		  .catch(errorCallback);
 		
 		video.addEventListener('dblclick',event => {
