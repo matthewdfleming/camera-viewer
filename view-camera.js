@@ -28,23 +28,14 @@ document.addEventListener('readystatechange', (event) => {
 		if('mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices) {
 			if(navigator.mediaDevices.enumerateDevices) {
 				navigator.mediaDevices.enumerateDevices().then(deviceInfos => {
-					for (let i = 0; i !== deviceInfos.length; ++i) {
-						const deviceInfo = deviceInfos[i];
+					media_devices.forEach(media_device => {
 						if(location.href.includes('&debug')) {
-							console.log(deviceInfo);
+							console.log(media_device);
 						}
-						if (deviceInfo.kind === 'videoinput'){
-							cameras.push(deviceInfo.deviceId);
+				    if(media_device.kind === 'videoinput') {
+					   	cameras = cameras.concat(media_device.deviceId);
 						}
-					}
-// 					media_devices.forEach(media_device => {
-// 						if(location.href.includes('&debug')) {
-// 							console.log(media_device);
-// 						}
-// 				    if(media_device.kind === 'videoinput') {
-// 					   	cameras = cameras.concat(media_device.deviceId);
-// 						}
-// 					})
+					})
 		    })
 		  }
 		}
@@ -61,7 +52,6 @@ document.addEventListener('readystatechange', (event) => {
 			} else {
 				camId = 0;
 			}
-			camId=1;
 			if(cameras.length > 1) {
 				if(navigator.mediaDevices || navigator.mediaDevices.enumerateDevices) {
 					currentStream.getTracks().forEach(track => {
