@@ -15,6 +15,7 @@ document.addEventListener('readystatechange', (event) => {
 			if(location.href.includes('&debug')) {
 				console.log(`stream: ${stream}`);
 			}
+		  return navigator.mediaDevices.enumerateDevices();
 		}
 
 		function errorCallback(error) {
@@ -23,11 +24,7 @@ document.addEventListener('readystatechange', (event) => {
 
 		navigator.mediaDevices.getUserMedia({ audio: false, video: true })
 		  .then(successCallback)
-		  .catch(errorCallback);
-
-		if('mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices) {
-			if(navigator.mediaDevices.enumerateDevices) {
-				navigator.mediaDevices.enumerateDevices().then(media_device => {
+		  .then(media_device => {
 					media_devices.forEach(media_device => {
 						if(location.href.includes('&debug')) {
 							console.log(media_device);
@@ -36,9 +33,7 @@ document.addEventListener('readystatechange', (event) => {
 					   	cameras = cameras.concat(media_device.deviceId);
 						}
 					})
-		    })
-		  }
-		}
+		  .catch(errorCallback);
 		
 		video.addEventListener('dblclick',event => {
 			if(location.href.includes('&debug')) {
