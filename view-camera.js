@@ -27,7 +27,7 @@ document.addEventListener('readystatechange', (event) => {
 
 		if('mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices) {
 			if(navigator.mediaDevices.enumerateDevices) {
-				navigator.mediaDevices.enumerateDevices().then(deviceInfos => {
+				navigator.mediaDevices.enumerateDevices().then(media_device => {
 					media_devices.forEach(media_device => {
 						if(location.href.includes('&debug')) {
 							console.log(media_device);
