@@ -71,7 +71,7 @@ document.addEventListener('readystatechange', (event) => {
 						audio: false,
 						video: {
 								deviceId: {
-									exact: cameras[2]
+									exact: cameras[0]
 								}
 							}
 					}).then(successCallback).catch(errorCallback);
