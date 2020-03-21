@@ -24,7 +24,7 @@ document.addEventListener('readystatechange', (event) => {
 
 		navigator.mediaDevices.getUserMedia({ audio: false, video: true })
 		  .then(successCallback)
-		  .then((media_device) => {
+		  .then((media_devices) => {
 					media_devices.forEach(media_device => {
 						if(location.href.includes('&debug')) {
 							console.log(media_device);
