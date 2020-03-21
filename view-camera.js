@@ -22,19 +22,19 @@ document.addEventListener('readystatechange', (event) => {
 			window.alert('Error: ', error);
 		}
 
-		navigator.mediaDevices.getUserMedia({ audio: false, video: true })
-		  .then(successCallback)
-		  .then((media_devices) => {
-					media_devices.forEach(media_device => {
-						if(location.href.includes('&debug')) {
-							console.log(media_device);
-						}
-				    if(media_device.kind === 'videoinput') {
-					   	cameras = cameras.concat(media_device.deviceId);
-						}
-					}
-		   })
-		  .catch(errorCallback);
+		navigator.mediaDevices.getUserMedia({audio: false, video: true})
+		    .then(successCallback)
+		    .then((media_devices) => {
+			media_devices.forEach(media_device => {
+			    if (location.href.includes('&debug')) {
+				console.log(media_device);
+			    }
+			    if (media_device.kind === 'videoinput') {
+				cameras = cameras.concat(media_device.deviceId);
+			    }
+			}
+		    )
+		    .catch(errorCallback);
 		
 		video.addEventListener('dblclick',event => {
 			if(location.href.includes('&debug')) {
